@@ -5,6 +5,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import edu.cnm.deepdive.animals.BuildConfig;
@@ -21,12 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
   private WebView contentView;
 
+  private Spinner animalSelector;
+
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     contentView = findViewById(R.id.content_view);
+    animalSelector = findViewById(R.id.animal_selector);
     setupWebView();
 
   }
@@ -59,14 +64,17 @@ public class MainActivity extends AppCompatActivity {
             .execute();
         if (response.isSuccessful()) {
           //random animal generator
-          List<Animal> animals = response.body();
+          List<Animal> animals = response.body();// retrofit gets objects
           Random rng = new Random();
           String url = animals.get(rng.nextInt(animals.size())).getImageUrl();
-          runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-              contentView.loadUrl(url);
-            }
+          //prepare data
+          runOnUiThread(() -> {
+            contentView.loadUrl(url);
+            //choose view based on data to display- next do adapter
+            ArrayAdapter<Animal> adapter = new ArrayAdapter<>(MainActivity.this,
+                android.R.layout.simple_dropdown_item_1line, animals);
+            animalSelector.setAdapter(adapter);
+            // array adapter tie to spinner with context list of animals
           });
         } else {
           Log.e(getClass().getName(), response.message());
