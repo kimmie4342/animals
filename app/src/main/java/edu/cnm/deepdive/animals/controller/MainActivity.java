@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             .execute();
         if (response.isSuccessful()) {
           //random animal generator
+
           List<Animal> animals = response.body();// retrofit gets objects
           Random rng = new Random();
           String url = animals.get(rng.nextInt(animals.size())).getImageUrl();
