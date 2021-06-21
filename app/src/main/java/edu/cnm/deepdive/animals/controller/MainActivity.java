@@ -1,10 +1,13 @@
 package edu.cnm.deepdive.animals.controller;
 
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     contentView = findViewById(R.id.content_view);
     animalSelector = findViewById(R.id.animal_selector);
+    animalSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+      @Override
+      public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        Animal animal = (Animal) adapterView.getItemAtPosition(position);
+        contentView.loadUrl(animal.getImageUrl());
+      }
+
+      @Override
+      public void onNothingSelected(AdapterView<?> parent) {
+
+      }
+    });
     setupWebView();
 
   }
@@ -65,13 +80,10 @@ public class MainActivity extends AppCompatActivity {
           //random animal generator
 
           List<Animal> animals = response.body();// retrofit gets objects
-          String url = animals.get(0).getImageUrl();
-          //prepare data
           adapter = new ArrayAdapter<>(MainActivity.this,
               R.layout.item_animal_spinner, animals);
           adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
           runOnUiThread(() -> {
-            contentView.loadUrl(url);
             //choose view based on data to display- next do adapter
             animalSelector.setAdapter(adapter);
             // array adapter tie to spinner with context list of animals
