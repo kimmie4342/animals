@@ -53,7 +53,7 @@ dependencies {
 
 
     //Gson (JSON parser) library
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
 
     //Retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -61,7 +61,12 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
 
-    testImplementation 'junit:junit:4.+'
+    //Picasso library
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
+
+    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

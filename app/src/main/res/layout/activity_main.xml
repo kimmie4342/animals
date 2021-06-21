@@ -3,31 +3,33 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  android:background="@color/black"
-  android:padding="@dimen/half_static_spacing"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
+  android:padding="@dimen/half_static_spacing"
+  android:background="@color/black"
   tools:context=".controller.MainActivity">
 
 
-
-  <WebView
-    android:id="@+id/content_view"
+  <ImageView
+    android:id="@+id/image"
     android:layout_width="0dp"
-    android:layout_height="0dp"
+    android:layout_height="wrap_content"
+    android:scaleType="fitCenter"
+    android:adjustViewBounds="true"
+    android:contentDescription="@string/animal_image_content_description"
     android:layout_margin="@dimen/half_static_spacing"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"/>
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"/>
 
   <Spinner
     android:id="@+id/animal_selector"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_static_spacing"
-    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     />
 
 
